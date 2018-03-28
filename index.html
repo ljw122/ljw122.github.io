@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #usb-btn-list {
+            list-style: none;
+            display: none;
+        }
+        #usb-btn-list li {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="usb-test">
+        <button class='usb-read'>USB</button>
+        <div id="usb-connect">
+            <ul id="usb-btn-list">
+                <li><button class="btn btn-red" data-color='red'>RED</button></li>
+                <li><button class="btn btn-green" data-color='green'>GREEN</button></li>
+                <li><button class="btn btn-blue" data-color='blue'>BLUE</button></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="ble-test">
+        <button class='ble-read'>BLUETOOTH</button>
+        <div id="ble-connect">
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src='./test.js'></script>
+</body>
+</html>
