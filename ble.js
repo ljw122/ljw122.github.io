@@ -27,7 +27,7 @@
         })
         .then(_ => {
             console.log('Connection Complete!');
-            btnDisconn.prop('disabled', false);
+            btnDisconn.prop('disabled', false).show();
             divConn.show();
             bleCh.addEventListener('characteristicvaluechanged', e => {
                 var value = e.target.value.buffer;
