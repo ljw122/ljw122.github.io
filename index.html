@@ -3,16 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        #usb-btn-list {
-            list-style: none;
-            display: none;
-        }
-        #usb-btn-list li {
-            display: inline-block;
-        }
-    </style>
+    <title>USB/BLE test</title>
+    <link rel='stylesheet' href='./style.css'>
 </head>
 <body>
     <div id="usb-test">
@@ -27,11 +19,21 @@
     </div>
 
     <div id="ble-test">
-        <button class='ble-read'>BLUETOOTH</button>
-        <div id="ble-connect">
+        <button class='ble-conn'>BLUETOOTH</button>
+        <button class="ble-disconn">Disconnect!</button>
+        <div id='ble-connected'>
+            <ul class='led-controler'>
+                <li><button data-type='1'>1</button></li>
+                <li><button data-type='2'>2</button></li>
+                <li><button data-type='3'>3</button></li>
+                <li><button data-type='0'>0</button></li>
+            </ul>
+            <div><ul class='state-led'></div>
         </div>
     </div>
-    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src='./test.js'></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src='./common.js'></script>
+    <script src='./usb.js'></script>
+    <script src='./ble.js'></script>
 </body>
 </html>

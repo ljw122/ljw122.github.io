@@ -1,0 +1,9 @@
+#usb-btn-list, #ble-connected, .ble-disconn {
+    display: none;
+}
+ul {
+    list-style: none;
+}
+ul li {
+    display: inline-block;
+}
