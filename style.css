@@ -4,6 +4,6 @@
 ul {
     list-style: none;
 }
-#usb-btn-list li, #led-controler li {
+#usb-btn-list li, .led-controler li {
     display: inline-block;
 }

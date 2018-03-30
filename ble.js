@@ -39,6 +39,8 @@
     btnDisconn.bind('click', function () {
         if (bleDev) {
             btnDisconn.prop('disabled', true).hide();
+            divState.html('');
+            divConn.hide();
             bleDev.gatt.disconnect();
             bleDev = null;
         }
