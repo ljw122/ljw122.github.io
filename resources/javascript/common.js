@@ -1,5 +1,3 @@
-// https://gist.github.com/boushley/5471599 참조
-
 function decodeUtf8(arrayBuffer) {
     var result = '';
     var i = 0;
