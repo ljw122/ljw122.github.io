@@ -9,5 +9,8 @@
   },
   "author": "Luis Montes",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "pagenodes-nodes": "^0.3.0",
+    "requirejs": "^2.3.5"
+  }
 }
