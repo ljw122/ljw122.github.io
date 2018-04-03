@@ -26,14 +26,24 @@
         let self = $(e.target);
         let command = self.closest('.command').val();
         let setup = getControlTransferSetup(self);
+        if (!command) {
+            device.controlTransferOut(setup, new TextEncoder('utf-8').encode(command))
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        } else {
+            device.controlTransferOut(setup)
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
 
-        device.controlTransferOut(setup, new TextEncoder('utf-8').encode(command))
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.log(error);
-        });
     });
 
     $('.control-transfer-in').on('click', function (e) {
