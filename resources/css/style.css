@@ -1,4 +1,4 @@
-#usb-btn-list, #ble-connected, .ble-disconn {
+#usb-btn-list, #usb-connect, #ble-connected, .ble-disconn {
     display: none;
 }
 ul {

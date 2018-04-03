@@ -1,19 +1,17 @@
 (function () {
     'use strict';
 
-    var usbDevices = [];
+    var device = null;
     var elemUsbUtil = $('#usb-connect');
 
     navigator.usb.addEventListener('connect', device => {
         console.log(device);
     });
 
-    $('.usb-read').bind('click', async () => {
-        let device;
+    $('.usb-read').on('click', async () => {
         navigator.usb.requestDevice({filters:[]})
         .then(selectedDevice => {
             device = selectedDevice;
-            usbDevices.push(device);
             elemUsbUtil.show();
             return device.open();
         })
@@ -21,10 +19,28 @@
 
     });
 
+    $('.control-transfer-out').on('click', function (e) {
+        let command = $('.command').val();
+        let requestType = $('.request-type').val();
+        let recipient = $('.recipient').val();
+        let request = $('.request').val();
+        let value = $('.value').val();
+        let index = $('.index').val();
+        let setup = {
+            requestType: requestType,
+            recipient: recipient,
+            request: request,
+            value: value,
+            index: index
+        };
 
-    $('#usb-btn-list').bind('click', '.btn', event => {
-        var target = $(event.target);
-        console.log(target.data('color'));
+        device.controlTransferOut(setup, new TextEncoder('utf-8').encode(command))
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.log(error);
+        });
     });
 
 })();

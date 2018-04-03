@@ -10,11 +10,21 @@
     <div id="usb-test">
         <button class='usb-read'>USB</button>
         <div id="usb-connect">
-            <ul id="usb-btn-list">
-                <li><button class="btn btn-red" data-color='red'>RED</button></li>
-                <li><button class="btn btn-green" data-color='green'>GREEN</button></li>
-                <li><button class="btn btn-blue" data-color='blue'>BLUE</button></li>
-            </ul>
+            <input type="text" class="command" placeholder="Command"/>
+            <select class='request-type'>
+                <option value="standard">Standard</option>
+                <option value="class">Class</option>
+                <option value="vendor">Vendor</option>
+            </select>
+            <select class='recipient'>
+                <option value="device">Device</option>
+                <option value="interface">Interface</option>
+                <option value="endpoint">Endpoint</option>
+            </select>
+            <input type="text" class="request" placeholder="Request"/>
+            <input type="text" class="value" placeholder="Value"/>
+            <input type="text" class="index" placeholder="Index"/>
+            <button class="control-transfer-out">Data OUT!</button>
         </div>
     </div>
 
