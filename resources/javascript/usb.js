@@ -15,6 +15,9 @@
             elemUsbUtil.show();
             return device.open();
         })
+        .then(_ => {
+            return device.claimInterface(1);
+        })
         .catch(error => {console.log(error);});
 
     });
