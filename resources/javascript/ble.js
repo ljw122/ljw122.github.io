@@ -7,7 +7,7 @@
 
     var service = 0x1234;
     var devUUID = 0xFFE1;
-    btnConn.bind('click', function () {
+    btnConn.on('click', function () {
         navigator.bluetooth.requestDevice({filters: [{services: [service]}]})
         .then(device => {
             bleDev = device;
@@ -36,7 +36,7 @@
         });
     });
 
-    btnDisconn.bind('click', function () {
+    btnDisconn.on('click', function () {
         if (bleDev) {
             btnDisconn.prop('disabled', true).hide();
             divState.html('');
@@ -46,7 +46,7 @@
         }
     });
 
-    $('.led-controler').bind('click', 'li button', function(e) {
+    $('.led-controler').on('click', 'li button', function(e) {
         var that = e.target;
         var type = $(that).data('type');
         var uint8array = new TextEncoder('utf-8').encode(type);
