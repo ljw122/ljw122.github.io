@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+}
+
+.container {
+    border: 5px solid #0FF;
+}
+
+.tetris {
+    width: 400px;
+    height: 720px;
+    margin: 0 auto;
+    border: 4px solid #F0F;
+	display: table;
+}
+
+.line {
+    height: 40px;
+	display: table-row;
+}
+.cell {
+	height: 38px;
+	width: 38px;
+	border: 1px solid #00000055;
+	display: table-cell;
+	margin: 0;
+}
+/* 사각형블록 */
+.block-0 {
+	background-color: rgba(255, 255, 0, 0.5);
+}
+/* 2블록 */
+.block-1 {
+	background-color: rgba(255, 0, 0, 0.5);
+}
+/* T블록 */
+.block-2 {
+	background-color: rgba(255, 0, 255, 0.5);
+}
+/* 1블록 */
+.block-3 {
+	background-color: rgba(0, 255, 255, 0.5);
+}
+/* ㄴ블록 */
+.block-4 {
+	background-color: rgba(255, 128, 0, 0.5);
+}
+/* 5블록 */
+.block-5 {
+	background-color: rgba(0, 255, 0, 0.5);
+}
+/* ㄱ블록 */
+.block-6 {
+	background-color: rgba(0, 0, 255, 0.5);
+}
