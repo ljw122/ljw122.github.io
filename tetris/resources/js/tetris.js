@@ -22,16 +22,24 @@ var tetris = (function ($, Model) {
 
 	//block을 board에 그림
 	var drawBlock = function () {
-		let i;
+		let i, posY, posX;
 		for (i=0; i<4; i++) {
-			board[block.position.y + block.type.rotateState[rotateState][i][0]][block.position.x + block.type.rotateState[rotateState][i][1]].addClass(block.type.name).addClass('block');
+			posY = block.position.y + block.type.rotateState[rotateState][i][0];
+			posX = block.position.x + block.type.rotateState[rotateState][i][1];
+			if (posY > -1) {
+				board[posY][posX].addClass(block.type.name).addClass('block');
+			}
 		}
 	};
 	//block을 board에서 지움
 	var undrawBlock = function () {
-		let i;
+		let i, posY, posX;
 		for (i=0; i<4; i++) {
-			board[block.position.y + block.type.rotateState[rotateState][i][0]][block.position.x + block.type.rotateState[rotateState][i][1]].removeClass(block.type.name).removeClass('block');
+			posY = block.position.y + block.type.rotateState[rotateState][i][0];
+			posX = block.position.x + block.type.rotateState[rotateState][i][1];
+			if (posY > -1) {
+				board[posY][posX].removeClass(block.type.name).removeClass('block');
+			}
 		}
 	};
 	//direction에 벽 또는 block이 있는지 체크
@@ -40,7 +48,7 @@ var tetris = (function ($, Model) {
 		for (i=0; i<ea.length; i++) {
 			let posY = block.position.y + ea[i][0];
 			let posX = block.position.x + ea[i][1];
-			if (posY > 15 || posX < 0 || posX > 9 || !board[posY][posX] || board[posY][posX].hasClass('block')) {
+			if (posY > 15 || posX < 0 || posX > 9 || (posY > 0 && board[posY][posX].hasClass('block'))) {
 				return false;
 			}
 		}
@@ -73,22 +81,38 @@ var tetris = (function ($, Model) {
 		}
 	};
 	var blockDown = function () {
-		moveBlock(1, 0);
 		if (checkDownBlock()) {
+			moveBlock(1, 0);
 			dropBlock();
 		} else {
 			createNewBlock();
 		}
 	}
 	var moveDown = function () {
+		clearTimeout(timer);
 		if (checkDownBlock()) {
-			clearTimeout(timer);
 			blockDown();
+		} else {
+			createNewBlock();
 		}
 	};
 	var rotateRight = function () {
+		let targetRotateState = (rotateState + 1) % 4;
+		let targetBlockRotateState = block.type.rotateState[targetRotateState];
+		let i, targetY, targetX, isRotatable = true;
+
 		undrawBlock();
-		rotateState = (rotateState + 1) % 4;
+		for (i=0; i<4; i++) {
+			targetY = block.position.y + targetBlockRotateState[i][0];
+			targetX = block.position.x + targetBlockRotateState[i][1];
+			if (targetX < 0 || targetX > 9 || (targetY > 0 && board[targetY][targetX].hasClass('block'))) {
+				isRotatable = false;
+			}
+		}
+
+		if (isRotatable) {
+			rotateState = targetRotateState;
+		}
 		drawBlock();
 	};
 	var rotateLeft = function () {
