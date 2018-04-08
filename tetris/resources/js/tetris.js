@@ -4,7 +4,7 @@ var tetris = (function ($, Model) {
 	var block = null;
 	var rotateState = 0;
 	var timer, interval = 1;
-	var board = [];
+	var body = $('.tetris'), board = [], lines = [];
 
 	var initBoard = function () {
 		let i, j, tmp;
@@ -17,6 +17,7 @@ var tetris = (function ($, Model) {
 				tmp.push($(boardCell[j]));
 			}
 			board.push(tmp);
+			lines.push($(boardRow[i]));
 		}
 	};
 
@@ -39,6 +40,24 @@ var tetris = (function ($, Model) {
 			posX = block.position.x + block.type.rotateState[rotateState][i][1];
 			if (posY > -1) {
 				board[posY][posX].removeClass(block.type.name).removeClass('block');
+			}
+		}
+	};
+	var clearLines = function () {
+		let i, j, isClear, tmp;
+		for (i=0; i<16; i++) {
+			isClear = true;
+			for (j=0; j<10; j++) {
+				if (!board[i][j].hasClass('block')) {
+					isClear = false;
+				}
+			}
+			if (isClear) {
+				lines[i].find('.cell').removeClass('block block-0 block-1 block-2 block-3 block-4 block-5 block-6');
+				tmp = lines[i].detach();
+				body.prepend(tmp);
+				lines.unshift(lines.splice(i, 1)[0]);
+				board.unshift(board.splice(i, 1)[0]);
 			}
 		}
 	};
@@ -85,6 +104,7 @@ var tetris = (function ($, Model) {
 			moveBlock(1, 0);
 			dropBlock();
 		} else {
+			clearLines();
 			createNewBlock();
 		}
 	}
