@@ -1,5 +1,5 @@
 var model = (function ($) {
-	var dropCenter = [0, 5];
+	var dropCenter = [-1, 5];
 	var blocks = [
 		{
 			name: 'block-0',

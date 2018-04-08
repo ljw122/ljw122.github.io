@@ -90,11 +90,12 @@ var tetris = (function ($, Model) {
 	}
 	var moveDown = function () {
 		clearTimeout(timer);
-		if (checkDownBlock()) {
-			blockDown();
-		} else {
-			createNewBlock();
-		}
+		// if (checkDownBlock()) {
+		// 	blockDown();
+		// } else {
+		// 	createNewBlock();
+		// }
+		blockDown();
 	};
 	var rotateRight = function () {
 		let targetRotateState = (rotateState + 1) % 4;
@@ -128,6 +129,10 @@ var tetris = (function ($, Model) {
 			}
 		};
 		block = newBlock;
+		if (block.type.name === 'block-3') {
+			block.position.y = 0;
+			block.position.x = 4;
+		}
 		rotateState = 0;
 		drawBlock();
 		if (checkDownBlock()) {
