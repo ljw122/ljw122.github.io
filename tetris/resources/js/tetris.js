@@ -110,11 +110,19 @@ var tetris = (function ($, Model) {
 	}
 	var moveDown = function () {
 		clearTimeout(timer);
-		// if (checkDownBlock()) {
-		// 	blockDown();
-		// } else {
-		// 	createNewBlock();
-		// }
+		blockDown();
+	};
+	var moveToBottom = function () {
+		clearTimeout(timer);
+		undrawBlock();
+		while (true) {
+			if (checkDownBlock()) {
+				block.position.y += 1;
+			} else {
+				break;
+			}
+		}
+		drawBlock();
 		blockDown();
 	};
 	var rotateRight = function () {
@@ -175,6 +183,8 @@ var tetris = (function ($, Model) {
 				moveRight();
 			} else if (key === 'ArrowDown') {
 				moveDown();
+			} else if (key === ' ') {
+				moveToBottom();
 			}
 		});
 	};
