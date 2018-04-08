@@ -3,7 +3,7 @@ var tetris = (function ($, Model) {
 	var dropCenter = Model.dropCenter;
 	var block = null;
 	var rotateState = 0;
-	var timer, interval = 7;
+	var timer, interval = 1;
 	var board = [];
 
 	var initBoard = function () {
