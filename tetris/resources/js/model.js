@@ -1,5 +1,5 @@
 var model = (function ($) {
-	var dropCenter = [-1, 5];
+	var dropCenter = [1, 2];
 	var blocks = [
 		{
 			name: 'block-0',
@@ -248,9 +248,18 @@ var model = (function ($) {
 		},
 	];
 
+	function Block(blockIndex) {
+		this.type = blocks[blockIndex];
+		this.position = {
+			y: dropCenter[0],
+			x: dropCenter[1]
+		};
+	}
+
 	return {
 		dropCenter: dropCenter,
-		blocks: blocks
-	}
+		blocks: blocks,
+		Block: Block
+	};
 
 })(jQuery);

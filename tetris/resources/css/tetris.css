@@ -3,28 +3,84 @@ body {
 }
 
 .container {
-    border: 5px solid #0FF;
+	position: relative;
+	margin: 0 auto;
+	width: 526px;
+}
+
+.main {
+	border: 5px solid #0FF;
+}
+.main::after, .line::after {
+	display: block;
+	content: '';
+	clear: both;
+}
+.game-body, .extra-blocks, .cell{
+	display: inline-block;
+	float: left;
 }
 
 .tetris {
     width: 400px;
-    height: 720px;
-    margin: 0 auto;
+    height: 640px;
     border: 4px solid #F0F;
-	display: table;
 }
 
 .line {
-    height: 40px;
-	display: table-row;
+	height: 6.25%;
 }
-.cell {
-	height: 38px;
-	width: 38px;
-	border: 1px solid #00000055;
-	display: table-cell;
-	margin: 0;
+.tetris .cell {
+	height: calc(100% - 2px);
+    width: calc(10% - 2px);
+    border: 1px solid #00000055;
 }
+
+.extra-inner {
+	width: 100px;
+	height: 640px;
+	border: 4px solid #FF0;
+}
+
+.next-header {
+	height: 36px;
+}
+
+.dot.cell {
+	width: 4px;
+	height: 4px;
+}
+
+.next-first, .hold-block {
+	height: 64px;
+}
+.next-first .line, .hold-block .line {
+	width: 80px;
+	height: 16px;
+	margin: 0 auto;
+}
+.next-first .cell, .hold-block .cell {
+	height: 16px;
+	width: 16px;
+}
+
+.next-second, .next-third {
+	height: 48px;
+}
+.next-second .line, .next-third .line {
+	width: 60px;
+	height: 12px;
+	margin: 0 auto;
+}
+.next-second .cell, .next-third .cell {
+	width: 12px;
+	height: 12px;
+}
+
+.black {
+	background-color: rgba(0, 0, 0, 1);
+}
+
 /* 사각형블록 */
 .block-0 {
 	background-color: rgba(255, 255, 0, 0.5);
