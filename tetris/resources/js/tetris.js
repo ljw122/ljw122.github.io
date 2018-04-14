@@ -6,9 +6,9 @@ var tetris = (function ($, Model) {
 	var timer, interval = 1;
 	var mainBody = $('.tetris'), mainBoard = [], mainLines = [];
 	var nextBodies = [$('.next-first'), $('.next-second'), $('.next-third')], nextBoards = [], nextBlocks = [];
-	var holdBody = $('.hold-block'), holdBoard = [];
+	var holdBody = $('.hold-block'), holdBoard = [], holdBlock = null;
 	var clearLinesCount = 0;
-	var isOver;
+	var isOver, isHoldable;
 
 	var initBoard = function () {
 		let i;
@@ -198,7 +198,7 @@ var tetris = (function ($, Model) {
 	var rotateLeft = function () {
 		rotateBlock((rotateState + 3) % 4);
 	};
-
+	//next block 초기화 - 3개 생성 후 그리기
 	var setNextBlocks = function () {
 		let i;
 		for (i=0; i<3; i++) {
@@ -206,23 +206,44 @@ var tetris = (function ($, Model) {
 		}
 		drawNextBlock();
 	};
-	var createNewBlock = function () {
+	//next block에서 꺼내온 뒤 다음블럭 생성
+	var getNextBlock = function () {
+		let tmpBlock;
 		eraseNextBlock();
-		block = nextBlocks.pop();
-		
-		if (block.type.name === 'block-3') {
-			block.position.y = 0;
-			block.position.x = 4;
+		tmpBlock = nextBlocks.pop();
+		if (tmpBlock.type.name === 'block-3') {
+			tmpBlock.position.y = 0;
+			tmpBlock.position.x = 4;
 		} else {
-			block.position.y = 0;
-			block.position.x = 5;
+			tmpBlock.position.y = 0;
+			tmpBlock.position.x = 5;
 		}
-		rotateState = 0;
-
+		
 		nextBlocks.unshift(new Model.Block(Math.floor(Math.random() * 7)));
 		drawNextBlock();
-
+		
+		return tmpBlock;
+	};
+	//새 블럭 생성 - next block에서 꺼낸 후 next block 추가
+	var createNewBlock = function () {
+		// eraseNextBlock();
+		// block = nextBlocks.pop();
+		// 
+		// if (block.type.name === 'block-3') {
+		// 	block.position.y = 0;
+		// 	block.position.x = 4;
+		// } else {
+		// 	block.position.y = 0;
+		// 	block.position.x = 5;
+		// }
+		// rotateState = 0;
+		// 
+		// nextBlocks.unshift(new Model.Block(Math.floor(Math.random() * 7)));
+		// drawNextBlock();
+		block = getNextBlock();
+		rotateState = 0;
 		if (checkEmptySpace()) {
+			isHoldable = true;
 			drawBlock(block, mainBoard);
 			if (checkDownBlock()) {
 				dropBlock();
@@ -231,11 +252,42 @@ var tetris = (function ($, Model) {
 			alert('Game is Over! Press F5 key Please');
 		}
 	};
+	//block 타이머 설정
 	var dropBlock = function () {
 		timer = setTimeout(_ => {
 			blockDown();
 		}, 1000/interval);
 	};
+	//hold 기능
+	var changeHoldBlock = function () {
+		let tmpBlock = block;
+		clearTimeout(timer);
+		eraseBlock(block, mainBoard);
+		if (holdBlock) {
+			eraseBlock(holdBlock, holdBoard, 0);
+			block = holdBlock;
+		} else {
+			block = getNextBlock();
+		}
+		
+		holdBlock = tmpBlock;
+		if (block.type.name === 'block-3') {
+			block.position.y = 0;
+			block.position.x = 4;
+		} else {
+			block.position.y = 0;
+			block.position.x = 5;
+		}
+		holdBlock.position.y = 1;
+		holdBlock.position.x = 2;
+		rotateState = 0;
+		
+		drawBlock(holdBlock, holdBoard, 0);
+		drawBlock(block, mainBoard);
+		dropBlock();
+		isHoldable = false;
+	}
+
 	var attachEvent = function () {
 		$('body').on('keydown', event => {
 			let key = event.key;
@@ -252,7 +304,9 @@ var tetris = (function ($, Model) {
 			} else if (key === 'z') {
 				rotateLeft();
 			} else if (key === 'Shift') {
-				holdBlock();
+				if (isHoldable) {
+					changeHoldBlock();
+				}
 			}
 		});
 	};
