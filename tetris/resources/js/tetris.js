@@ -9,6 +9,7 @@ var tetris = (function ($, Model) {
 	var holdBody = $('.hold-block'), holdBoard = [], holdBlock = null;
 	var clearLinesCount = 0;
 	var isOver, isHoldable;
+	var keypad = $('.mobile-keypad');
 
 	var initBoard = function () {
 		let i;
@@ -277,6 +278,15 @@ var tetris = (function ($, Model) {
 	var attachEvent = function () {
 		$('body').on('keydown', event => {
 			let key = event.key;
+			eventDistributor(key);
+		});
+		
+		keypad.on('click', '.keypad', event => {
+			let target = $(event.target);
+			eventDistributor(target.data('key'));
+		});
+		
+		function eventDistributor(key) {
 			if (key === 'ArrowUp') {
 				rotateRight();
 			} else if (key === 'ArrowLeft') {
@@ -294,7 +304,7 @@ var tetris = (function ($, Model) {
 					changeHoldBlock();
 				}
 			}
-		});
+		}
 	};
 	var detachEvent = function () {
 		$('body').off('keydown');
