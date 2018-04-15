@@ -2,10 +2,17 @@ body {
     margin: 0;
 }
 
+@media (min-width: 768px) {
+	.container {
+		position: relative;
+		margin: 0 auto;
+		max-width: 600px;
+	}
+}
+
 .container {
 	position: relative;
-	margin: 0 auto;
-	width: 526px;
+	width: 100%;
 }
 
 .main {
@@ -21,8 +28,13 @@ body {
 	float: left;
 }
 
+.game-body {
+	width: 80%;
+}
+.extra-blocks {
+	width: 20%;
+}
 .tetris {
-    width: 400px;
     height: 640px;
     border: 4px solid #F0F;
 }
@@ -37,17 +49,12 @@ body {
 }
 
 .extra-inner {
-	width: 100px;
 	height: 640px;
 	border: 4px solid #FF0;
 }
 
-.next-header {
-	height: 36px;
-}
-
 .dot.cell {
-	width: 4px;
+	width: 4%;
 	height: 4px;
 }
 
@@ -55,25 +62,25 @@ body {
 	height: 64px;
 }
 .next-first .line, .hold-block .line {
-	width: 80px;
+	width: 80%;
 	height: 16px;
 	margin: 0 auto;
 }
 .next-first .cell, .hold-block .cell {
 	height: 16px;
-	width: 16px;
+	width: 20%;
 }
 
 .next-second, .next-third {
 	height: 48px;
 }
 .next-second .line, .next-third .line {
-	width: 60px;
+	width: 60%;
 	height: 12px;
 	margin: 0 auto;
 }
 .next-second .cell, .next-third .cell {
-	width: 12px;
+	width: 20%;
 	height: 12px;
 }
 
@@ -81,31 +88,40 @@ body {
 	background-color: rgba(0, 0, 0, 1);
 }
 
+.mobile-keypad {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 4;
+}
+
 /* 사각형블록 */
 .block-0 {
-	background-color: rgba(255, 255, 0, 0.5);
+	background-color: rgba(255, 255, 0, 0.6);
 }
 /* 2블록 */
 .block-1 {
-	background-color: rgba(255, 0, 0, 0.5);
+	background-color: rgba(255, 0, 0, 0.6);
 }
 /* T블록 */
 .block-2 {
-	background-color: rgba(255, 0, 255, 0.5);
+	background-color: rgba(255, 0, 255, 0.6);
 }
 /* 1블록 */
 .block-3 {
-	background-color: rgba(0, 255, 255, 0.5);
+	background-color: rgba(0, 255, 255, 0.6);
 }
 /* ㄴ블록 */
 .block-4 {
-	background-color: rgba(255, 128, 0, 0.5);
+	background-color: rgba(255, 128, 0, 0.6);
 }
 /* 5블록 */
 .block-5 {
-	background-color: rgba(0, 255, 0, 0.5);
+	background-color: rgba(0, 255, 0, 0.6);
 }
 /* ㄱ블록 */
 .block-6 {
-	background-color: rgba(0, 0, 255, 0.5);
+	background-color: rgba(0, 0, 255, 0.6);
 }

@@ -226,20 +226,6 @@ var tetris = (function ($, Model) {
 	};
 	//새 블럭 생성 - next block에서 꺼낸 후 next block 추가
 	var createNewBlock = function () {
-		// eraseNextBlock();
-		// block = nextBlocks.pop();
-		// 
-		// if (block.type.name === 'block-3') {
-		// 	block.position.y = 0;
-		// 	block.position.x = 4;
-		// } else {
-		// 	block.position.y = 0;
-		// 	block.position.x = 5;
-		// }
-		// rotateState = 0;
-		// 
-		// nextBlocks.unshift(new Model.Block(Math.floor(Math.random() * 7)));
-		// drawNextBlock();
 		block = getNextBlock();
 		rotateState = 0;
 		if (checkEmptySpace()) {
