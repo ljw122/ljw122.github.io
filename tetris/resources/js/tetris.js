@@ -9,7 +9,7 @@ var tetris = (function ($, Model) {
 	var holdBody = $('.hold-block'), holdBoard = [], holdBlock = null;
 	var clearLinesCount = 0;
 	var isOver, isHoldable;
-	var keypad = $('.mobile-keypad');
+	var keypad = $('.mobile-keypad'), intro = keypad.find('.intro');
 
 	var initBoard = function () {
 		let i;
@@ -105,6 +105,14 @@ var tetris = (function ($, Model) {
 	};
 	//GameOver 확인
 	var checkEmptySpace = function () {
+		let i, posY, posX;
+		for (i=0; i<4; i++) {
+			posY = block.position.y + block.type.rotateState[rotateState][i][0];
+			posX = block.position.x + block.type.rotateState[rotateState][i][1];
+			if (posY > -1 && mainBoard[posY][posX].hasClass('block')) {
+				return false;
+			}
+		}
 		return true;
 	}
 	//direction에 벽 또는 block이 있는지 체크
@@ -231,13 +239,14 @@ var tetris = (function ($, Model) {
 		rotateState = 0;
 		if (checkEmptySpace()) {
 			isHoldable = true;
-			drawBlock(block, mainBoard);
 			if (checkDownBlock()) {
 				dropBlock();
 			}
 		} else {
 			alert('Game is Over! Press F5 key Please');
+			endGame();
 		}
+		drawBlock(block, mainBoard);
 	};
 	//block 타이머 설정
 	var dropBlock = function () {
@@ -303,6 +312,9 @@ var tetris = (function ($, Model) {
 				if (isHoldable) {
 					changeHoldBlock();
 				}
+			} else if (key === 'Escape') {
+				intro.hide();
+				startGame();
 			}
 		}
 	};
@@ -310,12 +322,18 @@ var tetris = (function ($, Model) {
 		$('body').off('keydown');
 	}
 
+	var startGame = function () {
+		isOver = false;
+		createNewBlock();
+	}
+	var endGame = function () {
+		clearTimeout(timer);
+		detachEvent();
+	}
 	var init = function () {
 		initBoard();
 		setNextBlocks();
 		attachEvent();
-		isOver = false;
-		createNewBlock();
 	};
 	
 	init();
