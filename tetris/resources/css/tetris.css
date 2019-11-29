@@ -151,7 +151,7 @@ body {
 }
 /* ㄴ블록 */
 .block-4 {
-	background-color: rgba(255, 128, 0, 0.6);
+	background-color: rgba(0, 0, 255, 0.6);
 }
 /* 5블록 */
 .block-5 {
@@ -159,5 +159,5 @@ body {
 }
 /* ㄱ블록 */
 .block-6 {
-	background-color: rgba(0, 0, 255, 0.6);
+	background-color: rgba(255, 128, 0, 0.6);
 }
